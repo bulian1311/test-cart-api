@@ -1,9 +1,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { PORT } = require('./config/keys');
+const mongoose = require('mongoose');
+const { PORT, MONGO } = require('./config/keys');
 
 const app = express();
+
+//DB connect
+(async () => {
+  try {
+    await mongoose.connect(
+      MONGO,
+      { useNewUrlParser: true }
+    );
+    console.log('Mongo connected...');
+  } catch (err) {
+    console.error(err.message);
+  }
+})();
 
 app.use('*', cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,5 +43,5 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Run on port:${PORT}`);
+  console.log(`App run on port:${PORT}...`);
 });
