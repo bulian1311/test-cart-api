@@ -1,45 +1,45 @@
 class CartModel {
   constructor(oldCart) {
-    this.items = oldCart.items || {};
-    this.totalQty = oldCart.totalQty || 0;
-    this.totalPrice = oldCart.totalPrice || 0;
+    this.total_sum = oldCart.total_sum || 0;
+    this.total_count = oldCart.total_count || 0;
+    this.products = oldCart.products || [];
   }
 
-  add(item, id, qty) {
-    let storedItem = this.items[id];
-    if (!storedItem) {
-      storedItem = this.items[id] = { item: item, qty: 0, price: 0 };
+  add(product, id, quantity) {
+    let stored_product;
+
+    this.products.forEach(product => {
+      if (id === product.id) stored_product = product;
+    });
+
+    if (!stored_product) {
+      stored_product = { id, quantity: 0, sum: 0 };
+      this.products.push(stored_product);
     }
-    storedItem.qty += qty;
-    storedItem.price = storedItem.item.price * storedItem.qty;
-    this.totalQty += qty;
-    this.totalPrice += storedItem.item.price;
+
+    stored_product.quantity += quantity;
+    stored_product.sum = product.price * stored_product.quantity;
+
+    this.total_count += quantity;
+    this.total_sum += product.price * quantity;
   }
 
-  reduceByOne(id) {
-    this.items[id].qty--;
-    this.items[id].price -= this.items[id].item.price;
-    this.totalQty--;
-    this.totalPrice -= this.items[id].item.price;
+  removeOne(product, id) {
+    id = Number(id);
 
-    if (this.items[id].qty <= 0) {
-      delete this.items[id];
+    for (let i = this.products.length - 1; i >= 0; i--) {
+      if (this.products[i].id === id) {
+        this.products[i].quantity--;
+        this.products[i].sum -= product.price;
+        this.total_count--;
+        this.total_sum -= product.price;
+
+        if (this.products[i].quantity <= 0) {
+          this.products.splice(i, 1);
+        }
+      }
     }
   }
-
-  // removeItem(id) {
-  //   this.totalQty -= this.items[id].qty;
-  //   this.totalPrice -= this.items[id].price;
-  //   delete this.items[id];
-  // }
-
-  // generateArray() {
-  //   var arr = [];
-  //   for (let id in this.items) {
-  //     arr.push(this.items[id]);
-  //   }
-  //   return arr;
-  // }
 }
 
 module.exports = CartModel;
