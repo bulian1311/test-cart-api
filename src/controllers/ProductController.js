@@ -1,6 +1,11 @@
 const Product = require('../models/ProductModel');
 
 class ProductController {
+  /**
+   * Получить все продукты
+   * @param {*} req
+   * @param {*} res
+   */
   async getProducts(req, res) {
     try {
       const products = await Product.find();
@@ -15,6 +20,11 @@ class ProductController {
     }
   }
 
+  /**
+   * Создать новый продукт
+   * @param {*} req
+   * @param {*} res
+   */
   async createProduct(req, res) {
     const { id, name, description, price } = req.body;
     try {

@@ -14,7 +14,7 @@ const app = express();
       MONGO,
       { useNewUrlParser: true }
     );
-    console.log('Mongo connected...');
+    console.log('Mongo connected');
   } catch (err) {
     console.error(err.message);
   }
@@ -52,5 +52,5 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`App run on port:${PORT}...`);
+  console.log(`App run on port:${PORT}`);
 });

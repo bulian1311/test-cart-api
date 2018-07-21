@@ -5,6 +5,12 @@ class CartModel {
     this.products = oldCart.products || [];
   }
 
+  /**
+   * Добавить в корзину любое колличество элементов
+   * @param {*} product
+   * @param {*} id
+   * @param {*} quantity
+   */
   add(product, id, quantity) {
     let stored_product;
 
@@ -24,6 +30,11 @@ class CartModel {
     this.total_sum += product.price * quantity;
   }
 
+  /**
+   * удалить один элемент из корзины
+   * @param {*} product
+   * @param {*} id
+   */
   removeOne(product, id) {
     id = Number(id);
 

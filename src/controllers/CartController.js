@@ -2,6 +2,11 @@ const Cart = require('../models/CartModel');
 const Product = require('../models/ProductModel');
 
 class CartController {
+  /**
+   * Добавить продукт в корзину
+   * @param {*} req
+   * @param {*} res
+   */
   async addToCart(req, res) {
     const { product_id, quantity } = req.body;
 
@@ -23,6 +28,11 @@ class CartController {
     }
   }
 
+  /**
+   * Получить корзину
+   * @param {*} req
+   * @param {*} res
+   */
   getCart(req, res) {
     if (!req.session.cart || req.session.cart.products.length === 0) {
       res.status(200).json({ message: 'Cart is empty' });
@@ -31,6 +41,11 @@ class CartController {
     res.status(200).json({ cart });
   }
 
+  /**
+   * Удалить элемент из корзины
+   * @param {*} req
+   * @param {*} res
+   */
   async removeFromCart(req, res) {
     if (!req.session.cart) {
       res.status(200).json({ message: 'Cart is empty' });
