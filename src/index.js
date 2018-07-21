@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const session = require('express-session');
 const { PORT, MONGO } = require('./config/keys');
 
 const app = express();
@@ -22,6 +23,14 @@ const app = express();
 app.use('*', cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(
+  session({
+    secret: 'mysecret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 300000 }
+  })
+);
 
 //Routes
 require('./routes/index')(app);

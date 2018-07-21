@@ -5,14 +5,14 @@ class CartModel {
     this.totalPrice = oldCart.totalPrice || 0;
   }
 
-  add(item, id) {
+  add(item, id, qty) {
     let storedItem = this.items[id];
     if (!storedItem) {
       storedItem = this.items[id] = { item: item, qty: 0, price: 0 };
     }
-    storedItem.qty++;
+    storedItem.qty += qty;
     storedItem.price = storedItem.item.price * storedItem.qty;
-    this.totalQty++;
+    this.totalQty += qty;
     this.totalPrice += storedItem.item.price;
   }
 
@@ -27,11 +27,11 @@ class CartModel {
     }
   }
 
-  removeItem(id) {
-    this.totalQty -= this.items[id].qty;
-    this.totalPrice -= this.items[id].price;
-    delete this.items[id];
-  }
+  // removeItem(id) {
+  //   this.totalQty -= this.items[id].qty;
+  //   this.totalPrice -= this.items[id].price;
+  //   delete this.items[id];
+  // }
 
   // generateArray() {
   //   var arr = [];
