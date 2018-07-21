@@ -1,9 +1,9 @@
-const ProductModel = require('../models/ProductModel');
+const Product = require('../models/ProductModel');
 
 class ProductController {
   async getProducts(req, res) {
     try {
-      const products = await ProductModel.find();
+      const products = await Product.find();
 
       if (products.length === 0) {
         return res.status(200).json({ message: 'Product list is empty' });
@@ -18,7 +18,7 @@ class ProductController {
   async createProduct(req, res) {
     const { id, name, description, price } = req.body;
     try {
-      const product = await ProductModel.create({
+      const product = await Product.create({
         id,
         name,
         description,

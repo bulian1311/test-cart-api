@@ -33,13 +33,13 @@ class CartModel {
     delete this.items[id];
   }
 
-  generateArray() {
-    var arr = [];
-    for (var id in this.items) {
-      arr.push(this.items[id]);
-    }
-    return arr;
-  }
+  // generateArray() {
+  //   var arr = [];
+  //   for (let id in this.items) {
+  //     arr.push(this.items[id]);
+  //   }
+  //   return arr;
+  // }
 }
 
 module.exports = CartModel;
