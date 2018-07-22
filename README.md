@@ -1,12 +1,15 @@
-# естовое задание по позицию Node.js разработчика
+# Тестовое задание по позицию Node.js разработчика
 
 > Тестовое задание по позицию Node.js-разработчика в компанию Noveo (jobs.noveogroup.ru)
 
-## Quick Start
+## Быстрый старт
 
 ```bash
-# Install the dependencies
+# Установить зависимости
 npm install
+
+# Запустить приложение
+npm run start
 ```
 
 ## Endpoints
@@ -22,7 +25,7 @@ GET api/products
 ```bash
 POST api/products
 
-# Request sample
+# Образец запроса
 # {
 #   "id": 43,
 #   "name": "Название продукта",
@@ -48,7 +51,7 @@ DELETE api/cart/{id}
 ```bash
 POST api/cart
 
-# Request sample
+# Образец запроса
 # {
 #   "product_id": 123,
 #   "quantity": 123,
