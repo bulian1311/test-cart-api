@@ -55,6 +55,12 @@ POST api/cart
 # }
 ```
 
+### Получить информацию о приложении
+
+```bash
+GET api/info
+```
+
 ## App Info
 
 ### Author
