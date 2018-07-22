@@ -19,6 +19,10 @@ class CartController {
     try {
       const product = await Product.findOne({ id: product_id });
 
+      if (!product) {
+        res.status(400).json({ error: 'Product does not exist.' });
+      }
+
       cart.add(product, product.id, quantity);
       req.session.cart = cart;
 
@@ -58,13 +62,13 @@ class CartController {
       const product = await Product.findOne({ id: product_id });
 
       if (!product) {
-        res.status(400).json({ message: 'product does not exist' });
+        res.status(400).json({ message: 'Product does not exist' });
       }
 
       cart.removeOne(product, product_id);
 
       req.session.cart = cart;
-      res.status(200).json({ cart });
+      res.status(200).json({ message: 'success' });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
